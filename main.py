@@ -10,13 +10,11 @@ logging.basicConfig(level=logging.INFO)
 
 # Constants
 URL = "https://www.motoreststaraposta.cz/poledni-nabidka/"
-OUTPUT_PATH = "menu/menu.json"
-
+OUTPUT_PATH = "menu.json"  # Uloží se přímo vedle main.py
 
 # Function to remove extra spaces
 def remove_extra_spaces(text: str) -> str:
     return " ".join(text.split())
-
 
 # Function to extract menu data from soup
 def extract_menu_data(soup: BeautifulSoup) -> List[Dict[str, str]]:
@@ -46,7 +44,6 @@ def extract_menu_data(soup: BeautifulSoup) -> List[Dict[str, str]]:
 
     return menu_data
 
-
 # Function to fetch page content
 def fetch_page_content(url: str) -> BeautifulSoup:
     try:
@@ -57,7 +54,6 @@ def fetch_page_content(url: str) -> BeautifulSoup:
         logging.error("Failed to fetch page content: %s", e)
         raise
 
-
 # Function to save menu data to JSON file
 def save_to_json(data: List[Dict[str, str]], filepath: str) -> None:
     try:
@@ -67,13 +63,11 @@ def save_to_json(data: List[Dict[str, str]], filepath: str) -> None:
     except IOError as e:
         logging.error("Failed to save data to JSON: %s", e)
 
-
 def main():
     soup = fetch_page_content(URL)
     menu_data = extract_menu_data(soup)
     save_to_json(menu_data, OUTPUT_PATH)
     logging.info("Extracted menu data: %s", json.dumps(menu_data, ensure_ascii=False, indent=4))
-
 
 if __name__ == "__main__":
     main()

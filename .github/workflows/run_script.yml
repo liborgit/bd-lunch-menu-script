@@ -3,7 +3,10 @@ name: Run Lunch Menu Script
 on:
   schedule:
     - cron: "0 8 * * *"  # Automatické spuštění každý den v 8:00 UTC
-  workflow_dispatch:       # Přidá možnost manuálního spuštění
+  workflow_dispatch:       # Možnost manuálního spuštění
+
+permissions:
+  contents: write          # Povolení pro zápis do repozitáře
 
 jobs:
   run-python-script:
@@ -31,7 +34,8 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add menu/menu.json
-        git commit -m "Update menu.json"
+        git commit -m "Update menu.json" || echo "No changes to commit"
+        git pull --rebase
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

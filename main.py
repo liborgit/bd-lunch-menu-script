@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Constants
 URL = "https://www.motoreststaraposta.cz/poledni-nabidka/"
-OUTPUT_PATH = "menu.json"  # Uloží se přímo vedle main.py
+OUTPUT_PATH = "menu.json"
 
 # Function to remove extra spaces
 def remove_extra_spaces(text: str) -> str:

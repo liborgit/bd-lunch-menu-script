@@ -33,7 +33,7 @@ def extract_menu_data(soup: BeautifulSoup) -> List[Dict[str, str]]:
         # Find price at the end of the line
         match = re.search(r"(\d+,\-)$", menu_text)
         if match:
-            current_price = match.group(0) + " Kč"
+            current_price = match.group(0)
             name = menu_text.replace(match.group(0), "").strip()
             full_dish = remove_extra_spaces(current_dish + " " + name)
             menu_data.append({"Dish": full_dish, "Price": current_price})
